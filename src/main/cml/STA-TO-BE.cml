@@ -1,0 +1,174 @@
+Domain GestionDeDatosMedicosParaModelosIA {
+  domainVisionStatement = "Recaudar, procesar y distribuir imágenes médicas y diagnósticos anonimizados a compañías de IA y desarrolladores."
+  Subdomain ZonaHoraria {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Identificación de la zona horaria para cada país"
+  }
+  
+  Subdomain AdquisicionDeDatosMedicos {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Recaudar imágenes médicas y diagnóstico"
+  }
+  Subdomain LimpiezaYAnonimizacion {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Limpieza y anonimización de información en crudo y sensible"
+  }
+  Subdomain Procesamiento {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Estructuración, clasificación y guardado de información anonimizada"
+  }
+  Subdomain ConsumoDeDatos {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Exposición y distribución de información canonizada"
+  }
+  Subdomain InteligenciaDeNegocios {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Gestion de variedad, volumen, valor y veracidad de la información"
+  }
+  Subdomain NormativaPais {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Gestion de la normativa y regulaciones de los paises"
+  }
+}
+ContextMap STAMap {
+    type = SYSTEM_LANDSCAPE
+    state = AS_IS
+    contains SistemaExternoDeProveedores
+  contains IngestionContext
+  contains ProcesamientoContext
+    contains ConsumoStandardContext
+    contains ConsumoProContext
+    contains ConsumoEnterpriseContext
+    
+    
+  IngestionContext [D, ACL]<-[U,OHS,PL] SistemaExternoDeProveedores : ExtraerDatosOnPremise
+    ProcesamientoContext [D, ACL]<-[U,OHS,PL] IngestionContext
+    ConsumoStandardContext [D]<-[U,OHS,PL] ProcesamientoContext
+    ConsumoProContext [D]<-[U,OHS,PL] ProcesamientoContext
+    ConsumoEnterpriseContext [D]<-[U,OHS,PL] ProcesamientoContext
+}
+BoundedContext SistemaExternoDeProveedores {
+    Module SistemaDeArchivos {
+        basePackage = se.citerus.dddsample.domain.externalmodel
+        Aggregate Archivo {
+            ValueObject Formato
+        }
+    }
+}
+BoundedContext IngestionContext {
+    Module Registro {
+        basePackage = se.citerus.dddsample.domain.model
+        Aggregate RegistroUsuarios {
+            Entity Usuario
+            ValueObject Nombre
+            ValueObject FechaNacimiento
+            DomainEvent UsuarioRegistrado
+        }
+    }
+  Module ControlDeAcceso {
+        basePackage = se.citerus.dddsample.domain.model
+        Aggregate ControlarAcceso {
+            Entity Seguridad
+            ValueObject Credenciales
+            DomainEvent AccesoValidado
+        }
+    }
+    Module Carga {
+        basePackage = se.citerus.dddsample.domain.model
+        Aggregate CargarArchivosDiagnostico {
+            Entity ArchivoCrudo
+            ValueObject TamanioArchivo
+            DomainEvent DatosCargados
+        }
+    }
+  Module RegulacionGubernamental {
+        basePackage = se.citerus.dddsample.domain.model
+      Aggregate NormativaPais {
+        Entity Politica 
+              ValueObject Locacion
+              ValueObject Pais
+              DomainEvent PoliticasLegalesVerificadas
+              DomainEvent InformacionAuditada
+      }
+    }
+Module Almacenamiento {
+    basePackage = se.citerus.dddsample.domain.model
+    Aggregate AlmacenamientoDeInformacionMasiva {
+        Entity Almacenamiento 
+            ValueObject TipoAlmacenamiento
+            ValueObject Ubicacion
+            ValueObject TamanoMaximo
+            DomainEvent DatosAlmacenados
+            DomainEvent DatosEliminados
+            DomainEvent AlmacenamientoRedimensionado
+        
+    }
+}
+Module Anonimizacion {
+    basePackage = se.citerus.dddsample.domain.model
+    Aggregate ProcesoDeAnonimizacion {
+        Entity ArchivoAnonimizado 
+            ValueObject Identificador
+            ValueObject EstadoAnonimizado
+            ValueObject TecnicaAnonimizacion
+            DomainEvent InformacionPreparada
+            DomainEvent DatosAnonimizados 
+    }
+    Aggregate ProcesoDeVerificacion {
+            Entity Pipeline
+            DomainEvent DatosVerificados
+            DomainEvent DatosClasificados
+            DomainEvent VerificacionFallida
+    }
+  }
+}
+ 
+ BoundedContext ProcesamientoContext {
+    Module Procesamiento {
+    basePackage = se.citerus.dddsample.domain.model
+    Aggregate Etiqueta {
+            Entity Pipeline2
+            DomainEvent DatosEstructurados
+            DomainEvent DatosProcesados
+    }
+  }
+}
+BoundedContext ConsumoStandardContext {
+  Module RegistroCuenta {
+        basePackage = se.citerus.dddsample.domain.model
+        Aggregate RegistroCuenta {
+          Entity Cuenta
+            DomainEvent CuentaRegistrada
+        }
+  }
+    Module Busqueda {
+        basePackage = se.citerus.dddsample.domain.model
+        Aggregate BusquedaInformacionProcesada {
+            Entity Cliente
+            Entity ArchivoDeBusqueda
+            DomainEvent DatosSeleccionados
+        }
+    }
+    Module Descarga {
+        basePackage = se.citerus.dddsample.domain.model
+        
+        Aggregate DescargaDeInformacionProcesada {
+            Entity DetalleDescarga
+            DomainEvent DatosDescargados
+        }
+  }
+  
+}
+BoundedContext ConsumoProContext refines ConsumoStandardContext {
+  Module Ambiente {
+        basePackage = se.citerus.dddsample.domain.model
+        
+        Aggregate CreacionDeAmbienteVirtual {
+            Entity ClientePro
+            DomainEvent AmbienteVirtualCreado
+        }
+    }
+}
+BoundedContext ConsumoEnterpriseContext refines ConsumoProContext {
+  
+}

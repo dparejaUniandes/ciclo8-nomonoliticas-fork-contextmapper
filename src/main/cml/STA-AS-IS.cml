@@ -1,0 +1,110 @@
+Domain GestionDeDatosMedicosParaModelosIA {
+  domainVisionStatement = "Recaudar, procesar y distribuir imágenes médicas y diagnósticos anonimizados a compañías de IA y desarrolladores."
+  Subdomain AdquisicionDeDatosMedicos {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Recaudar imágenes médicas y diagnóstico"
+  }
+  Subdomain LimpiezaYAnonimizacion {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Limpieza y anonimización de información en crudo y sensible"
+  }
+  Subdomain Procesamiento {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Estructuración, clasificación y guardado de información anonimizada"
+  }
+  Subdomain ConsumoDeDatos {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Exposición y distribución de información canonizada"
+  }
+  Subdomain InteligenciaDeNegocios {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Gestion de variedad, volumen, valor y veracidad de la información"
+  }
+}
+ContextMap STAMap {
+    type = SYSTEM_LANDSCAPE
+    state = AS_IS
+    contains ProcesamientoContext
+    contains ConsumoContext
+    contains IngestionContext
+    contains SistemaExternoDeProveedores
+    IngestionContext [D, ACL]<-[U,OHS,PL] SistemaExternoDeProveedores : ExtraerDatosOnPremise
+    ProcesamientoContext [D, ACL]<-[U,OHS,PL] IngestionContext
+    ConsumoContext [D]<-[U,OHS,PL] ProcesamientoContext
+}
+BoundedContext SistemaExternoDeProveedores {
+    Module SistemaDeArchivos {
+        basePackage = se.citerus.dddsample.domain.externalmodel
+        Aggregate Archivo {
+            ValueObject Formato
+        }
+    }
+}
+BoundedContext IngestionContext {
+    Module Registro {
+        basePackage = se.citerus.dddsample.domain.model
+        Aggregate RegistroUsuarios {
+            Entity Usuario
+            ValueObject Nombre
+            ValueObject FechaNacimiento
+            DomainEvent UsuarioRegistrado
+        }
+    }
+    Module Carga {
+        basePackage = se.citerus.dddsample.domain.model
+        Aggregate CargarArchivosDiagnostico {
+            Entity ArchivoCrudo
+            ValueObject Tamanio
+            DomainEvent DatosCargados
+        }
+    }
+    Module Preparacion {
+        basePackage = se.citerus.dddsample.domain.model
+        Aggregate PreparacionArchivosDiagnostico {
+            Entity ArchivoAnonimizado
+            DomainEvent DatosAnonimizados
+        }
+    }
+    Module Verificacion {
+        basePackage = se.citerus.dddsample.domain.model
+         Aggregate VerificacionArchivosAnonimizados {
+            Entity ArchivoAnonimizadoVerificacion
+            DomainEvent DatosVerificados
+        }
+    }
+    Module Agrupacion {
+        basePackage = se.citerus.dddsample.domain.model
+         Aggregate AgrupacionDeInformacion {
+            Entity ArchivoConsolidado
+            DomainEvent DatosClasificados
+        }
+    }
+}
+BoundedContext ProcesamientoContext {
+    Module Automatizacion {
+        basePackage = se.citerus.dddsample.domain.model
+        Aggregate EjecucionAutomatizadaParaEntrenarModelo {
+            DomainEvent ProcesamientoFinalizado
+            DomainEvent DatosPersistidos
+        }
+    }
+    
+}
+BoundedContext ConsumoContext {
+    Module Busqueda {
+        basePackage = se.citerus.dddsample.domain.model
+        Aggregate BusquedaInformacionProcesada {
+            Entity Cliente
+            Entity ArchivoDeBusqueda
+            DomainEvent DatosSeleccionados
+        }
+    }
+    Module Descarga {
+        basePackage = se.citerus.dddsample.domain.model
+        
+        Aggregate DescargaDeInformacionProcesada {
+            Entity DetalleDescarga
+            DomainEvent DatosDescargados
+        }
+    }
+}
