@@ -21,6 +21,7 @@ Domain GestionDeDatosMedicosParaModelosIA {
     domainVisionStatement = "Gestion de variedad, volumen, valor y veracidad de la información"
   }
 }
+
 ContextMap STAMap {
     type = SYSTEM_LANDSCAPE
     state = AS_IS

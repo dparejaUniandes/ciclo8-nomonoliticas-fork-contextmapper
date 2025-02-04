@@ -1,0 +1,27 @@
+UserStory HU01_RegistroSTA {
+  As an "Desarrollaldor de IA"
+    I want to "crear" a "cuenta" with its "con mi información personal"
+  so that "poder acceder a los recursos que ofrece STA y poder entrenar mis modelos"
+}
+
+UserStory HU02_SelecionarPlan {
+  As an "Desarrollaldor de IA"
+    I want to "seleccionar" a "plan"
+  so that "Para encontrar las mejores alternativas al momento de entranar mis modelos de IA"
+}
+
+UserStory HU03_ProveerInformacion {
+  As an "Proveedor de salud"
+    I want to "proveer" a "datos anonimizados a STA"
+  so that "que la emprea pueda ofrecerlos a los consumidores y generar ganancias por su uso"
+}
+
+UserStory HU04_BuscarInformacion {
+  As an "Desarrollaldor de IA"
+    I want to "filtrar" a "información"
+  so that "encontrar una gran variedad de imágenes anonimizadas de diferentes modalidades y proveedores"
+}
+
+ContextMap STAMap {
+
+}
