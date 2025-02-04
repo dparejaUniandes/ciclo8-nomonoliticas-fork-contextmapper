@@ -1,28 +1,32 @@
-![Context Mapper](https://raw.githubusercontent.com/wiki/ContextMapper/context-mapper-dsl/logo/cm-logo-github-small.png)
-# Context Mapper Demo for Online IDE 
-[![Build](https://github.com/ContextMapper/web-ide-demo/actions/workflows/build.yml/badge.svg)](https://github.com/ContextMapper/web-ide-demo/actions) [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/ContextMapper/web-ide-demo) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+# Entrega semana 2
 
-Welcome to Context Mapper's demo repository. It illustrates how you can configure your own repository for the usage of Context Mapper in the online IDE [Gitpod](https://www.gitpod.io/).
+En la entrega de la semana 2 se ha realizado del dominio y subdominios tanto para AS-IS como para TO-BE con ContextMapper, para estos también se identifican los vision statement con el DSL.
 
-## Start Using Context Mapper Now
-Start the online IDE and use Context Mapper right now:
+## Event Storming AS-IS
+<img width="1532" alt="image" src="https://github.com/user-attachments/assets/66d831b0-506c-4be6-9357-20207fddf78f" />
 
-<a href="https://gitpod.io/#https://github.com/ContextMapper/web-ide-demo" style="padding: 10px;">
-    <img src="https://gitpod.io/button/open-in-gitpod.svg" width="150" alt="Push" align="center">
-</a>
-<br/><br/>
+## Event Storming TO-BE
 
-## Open the Demo File
-In the folder `src/main/cml` you find a small **[CML demo](./src/main/cml/demo.cml)** (DDD sample application) where you can start to familiarize yourself with our DSL and our tools.
-You can find more info's about the tool and a complete documentation on our website [https://contextmapper.org/](https://contextmapper.org/).
 
-## Create Your Own Context Mapping Repository
-You can simply fork this repository and click the button above to start the online IDE for your repo.
+Para la consulta de los event storming, se puede ingresar desde miro:
+* [Enlace Miro con Events Storming](https://miro.com/app/board/uXjVLnwfFlU=/?share_link_id=150905541425)
 
-## Useful Links
- 
- * [More example models](https://github.com/ContextMapper/context-mapper-examples)
- * [CML language reference](https://contextmapper.org/docs/language-reference/)
- * [Rapid prototyping tutorial](https://contextmapper.org/docs/rapid-ooad/)
- * [Architectural Refactorings](https://contextmapper.org/docs/architectural-refactorings/)
- * [Generators](https://contextmapper.org/docs/generators/)
+## Ejecución del workspace con GitPod
+Se ha utilizado el DSL ContextMapper, en donde se debe ingresar al presente repositorio y en la url anteponer `gitpod.io/#`, quedando de esta manera `gitpod.io/#/https://github.com/dparejaUniandes/ciclo8-nomonoliticas-fork-contextmapper`, para mayor facilidad, se pueda dar clic sobre el siguiente enlace:
+> [Crear ambiente para ejecición del ContextMapper](gitpod.io/#/https://github.com/dparejaUniandes/ciclo8-nomonoliticas-fork-contextmapper)
+
+## Archivos
+### Código
+Nos hemos basado en el workspace Demo que suministra ContextMapper, por este motivo, existen bastantes archivos en la raíz del proyecto y en otras carpetas. Para nuestro propósito, lo que debemos tener en cuenta es la ruta `src/main/cml`, acá se pueden encontrar dos archivos, uno que contiene toda la parte AS-IS y el otro archivo contiene la parte TO-BE
+
+<img width="1112" alt="image" src="https://github.com/user-attachments/assets/7506be28-f53b-4662-8df2-c320cf703647" />
+
+### Diagramas
+
+**AS-IS ContextMapper Imagen**
+![image](https://github.com/user-attachments/assets/bf711fbe-95b2-457a-89f1-a52ae90a5cb8)
+
+**TO-BE ContextMapper Imagen**
+![image](https://github.com/user-attachments/assets/108ce70e-7c15-437a-9a54-2fa3e3c2b510)
+
+Para acceder a las imágenes y PlantUML, se debe tener en cuenta la carpeta `src-gen` ubicada en la raíz del proyecto.
