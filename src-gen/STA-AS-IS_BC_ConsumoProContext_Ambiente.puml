@@ -1,0 +1,15 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package Ambiente {
+	package "'CreacionDeAmbienteVirtual' Aggregate" <<Rectangle>> {
+		class ClientePro <<(E,DarkSeaGreen) Entity>> {
+		}
+		class AmbienteVirtualCreado <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

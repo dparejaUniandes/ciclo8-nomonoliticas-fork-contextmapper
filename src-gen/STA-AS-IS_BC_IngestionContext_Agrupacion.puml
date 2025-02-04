@@ -1,0 +1,15 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package Agrupacion {
+	package "'AgrupacionDeInformacion' Aggregate" <<Rectangle>> {
+		class ArchivoConsolidado <<(E,DarkSeaGreen) Entity>> {
+		}
+		class DatosClasificados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

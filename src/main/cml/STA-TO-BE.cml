@@ -31,7 +31,7 @@ Domain GestionDeDatosMedicosParaModelosIA {
   }
   Subdomain Auditoria {
     type = GENERIC_SUBDOMAIN
-    domainVisionStatement = "Administración de la auditoría en el sistema global de STA"
+    domainVisionStatement = "Administración de la auditoría en el sistema glol de STA"
   }
   Subdomain SistemaDePagosTercerizado {
     type = GENERIC_SUBDOMAIN
@@ -82,7 +82,6 @@ ContextMap STAMap {
 }
 BoundedContext ProveedoresDeDatosContext {
     Module SistemaDeArchivos {
-        basePackage = se.citerus.dddsample.domain.externalmodel
         Aggregate Archivo {
             ValueObject Formato
         }

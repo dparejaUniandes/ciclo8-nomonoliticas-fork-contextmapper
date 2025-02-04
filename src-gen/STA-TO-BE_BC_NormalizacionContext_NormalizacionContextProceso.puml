@@ -1,0 +1,25 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package NormalizacionContextProceso {
+	package "'ProcesoDeLimpieza' Aggregate" <<Rectangle>> {
+		class PipelineLimpieza <<(E,DarkSeaGreen) Entity>> {
+		}
+		class TecnicaLimpieza <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class InformacionTransformada <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+	package "'ProcesoDeCanonizacion' Aggregate" <<Rectangle>> {
+		class PipelineCanonizacion <<(E,DarkSeaGreen) Entity>> {
+		}
+		class TecnicaCanonizacion <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class InformacionCanonizada <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

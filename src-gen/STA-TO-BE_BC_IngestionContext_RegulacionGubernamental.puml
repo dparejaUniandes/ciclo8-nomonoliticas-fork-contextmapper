@@ -1,0 +1,21 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package RegulacionGubernamental {
+	package "'NormativaPais' Aggregate" <<Rectangle>> {
+		class Politica <<(E,DarkSeaGreen) Entity>> {
+		}
+		class Locacion <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class Pais <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class PoliticasLegalesVerificadas <<(E,#ff9f4b) Domain Event>> {
+		}
+		class InformacionAuditada <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

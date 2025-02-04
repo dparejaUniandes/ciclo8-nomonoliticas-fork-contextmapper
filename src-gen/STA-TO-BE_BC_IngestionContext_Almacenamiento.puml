@@ -1,0 +1,25 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package Almacenamiento {
+	package "'AlmacenamientoDeInformacionMasiva' Aggregate" <<Rectangle>> {
+		class Almacenamiento <<(E,DarkSeaGreen) Entity>> {
+		}
+		class TipoAlmacenamiento <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class Ubicacion <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class TamanoMaximo <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class DatosAlmacenados <<(E,#ff9f4b) Domain Event>> {
+		}
+		class DatosEliminados <<(E,#ff9f4b) Domain Event>> {
+		}
+		class AlmacenamientoRedimensionado <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

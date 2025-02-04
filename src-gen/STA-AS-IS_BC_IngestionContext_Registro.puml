@@ -1,0 +1,19 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package Registro {
+	package "'RegistroUsuarios' Aggregate" <<Rectangle>> {
+		class Usuario <<(E,DarkSeaGreen) Entity>> {
+		}
+		class Nombre <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class FechaNacimiento <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class UsuarioRegistrado <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

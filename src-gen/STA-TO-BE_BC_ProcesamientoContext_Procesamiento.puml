@@ -1,0 +1,17 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package Procesamiento {
+	package "'Etiqueta' Aggregate" <<Rectangle>> {
+		class Pipeline2 <<(E,DarkSeaGreen) Entity>> {
+		}
+		class DatosEstructurados <<(E,#ff9f4b) Domain Event>> {
+		}
+		class DatosProcesados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

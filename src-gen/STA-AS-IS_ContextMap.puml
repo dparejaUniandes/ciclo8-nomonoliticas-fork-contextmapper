@@ -1,0 +1,34 @@
+@startuml
+
+skinparam componentStyle uml2
+
+component [ProcesamientoContext]
+component [IngestionContext]
+component [ProveedoresDeDatosContext]
+component [ConsumoStandardContext]
+component [ConsumoProContext]
+component [ConsumoEnterpriseContext]
+
+interface "ExtraerDatosOnPremise" as ExtraerDatosOnPremise
+[ProveedoresDeDatosContext] --> ExtraerDatosOnPremise : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+ExtraerDatosOnPremise <.. [IngestionContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as ProcesamientoContext_to_IngestionContext
+[IngestionContext] --> ProcesamientoContext_to_IngestionContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+ProcesamientoContext_to_IngestionContext <.. [ProcesamientoContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as ConsumoStandardContext_to_ProcesamientoContext
+[ProcesamientoContext] --> ConsumoStandardContext_to_ProcesamientoContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+ConsumoStandardContext_to_ProcesamientoContext <.. [ConsumoStandardContext] : consume
+
+interface "Upstream-Downstream" as ConsumoProContext_to_ProcesamientoContext
+[ProcesamientoContext] --> ConsumoProContext_to_ProcesamientoContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+ConsumoProContext_to_ProcesamientoContext <.. [ConsumoProContext] : consume
+
+interface "Upstream-Downstream" as ConsumoEnterpriseContext_to_ProcesamientoContext
+[ProcesamientoContext] --> ConsumoEnterpriseContext_to_ProcesamientoContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+ConsumoEnterpriseContext_to_ProcesamientoContext <.. [ConsumoEnterpriseContext] : consume
+
+
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package Carga {
+	package "'CargarArchivosDiagnostico' Aggregate" <<Rectangle>> {
+		class ArchivoCrudo <<(E,DarkSeaGreen) Entity>> {
+		}
+		class Tamanio <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class DatosCargados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

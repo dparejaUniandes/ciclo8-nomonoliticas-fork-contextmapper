@@ -1,0 +1,15 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package Descarga {
+	package "'DescargaDeInformacionProcesada' Aggregate" <<Rectangle>> {
+		class DetalleDescarga <<(E,DarkSeaGreen) Entity>> {
+		}
+		class DatosDescargados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

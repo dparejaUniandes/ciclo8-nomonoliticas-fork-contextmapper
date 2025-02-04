@@ -1,0 +1,33 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package AnonimizacionContextProceso {
+	package "'ProcesoDeAnonimizacionContext' Aggregate" <<Rectangle>> {
+		class PipelineAnonimizacionContext <<(E,DarkSeaGreen) Entity>> {
+		}
+		class Identificador <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class EstadoAnonimizado <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class TecnicaAnonimizacionContext <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class InformacionPreparada <<(E,#ff9f4b) Domain Event>> {
+		}
+		class DatosAnonimizados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+	package "'ProcesoDeVerificacion' Aggregate" <<Rectangle>> {
+		class PipelineVerificacion <<(E,DarkSeaGreen) Entity>> {
+		}
+		class DatosVerificados <<(E,#ff9f4b) Domain Event>> {
+		}
+		class DatosClasificados <<(E,#ff9f4b) Domain Event>> {
+		}
+		class VerificacionFallida <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

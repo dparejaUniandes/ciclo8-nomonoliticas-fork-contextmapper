@@ -1,0 +1,13 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package SistemaDeArchivos {
+	package "'Archivo' Aggregate" <<Rectangle>> {
+		class Formato <<(V,DarkSeaGreen) Value Object>> {
+		}
+	}
+}
+
+
+@enduml

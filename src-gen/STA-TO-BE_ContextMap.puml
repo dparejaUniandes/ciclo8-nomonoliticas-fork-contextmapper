@@ -1,0 +1,82 @@
+@startuml
+
+skinparam componentStyle uml2
+
+component [ProveedoresDeDatosContext]
+component [IngestionContext]
+component [NormalizacionContext]
+component [AnonimizacionContext]
+component [ProcesamientoContext]
+component [ConsumoStandardContext]
+component [ConsumoProContext]
+component [ConsumoEnterpriseContext]
+component [SistemaDePagosContext]
+component [RegionContext]
+component [ConsumoContext]
+component [AuditoriaContext]
+
+interface "Upstream-Downstream" as RegionContext_to_ProveedoresDeDatosContext
+[ProveedoresDeDatosContext] --> RegionContext_to_ProveedoresDeDatosContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+RegionContext_to_ProveedoresDeDatosContext <.. [RegionContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as IngestionContext_to_RegionContext
+[RegionContext] --> IngestionContext_to_RegionContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+IngestionContext_to_RegionContext <.. [IngestionContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as SistemaDePagosContext_to_RegionContext
+[RegionContext] --> SistemaDePagosContext_to_RegionContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+SistemaDePagosContext_to_RegionContext <.. [SistemaDePagosContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as NormalizacionContext_to_IngestionContext
+[IngestionContext] --> NormalizacionContext_to_IngestionContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+NormalizacionContext_to_IngestionContext <.. [NormalizacionContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as AnonimizacionContext_to_NormalizacionContext
+[NormalizacionContext] --> AnonimizacionContext_to_NormalizacionContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+AnonimizacionContext_to_NormalizacionContext <.. [AnonimizacionContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as ProcesamientoContext_to_AnonimizacionContext
+[AnonimizacionContext] --> ProcesamientoContext_to_AnonimizacionContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+ProcesamientoContext_to_AnonimizacionContext <.. [ProcesamientoContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as ConsumoContext_to_SistemaDePagosContext
+[SistemaDePagosContext] --> ConsumoContext_to_SistemaDePagosContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+ConsumoContext_to_SistemaDePagosContext <.. [ConsumoContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as ConsumoContext_to_ProcesamientoContext
+[ProcesamientoContext] --> ConsumoContext_to_ProcesamientoContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+ConsumoContext_to_ProcesamientoContext <.. [ConsumoContext] : use via ANTICORRUPTION_LAYER
+
+[ConsumoStandardContext]<-->[ConsumoContext] : Shared Kernel
+
+[ConsumoProContext]<-->[ConsumoContext] : Shared Kernel
+
+[ConsumoEnterpriseContext]<-->[ConsumoContext] : Shared Kernel
+
+interface "Upstream-Downstream" as AuditoriaContext_to_NormalizacionContext
+[NormalizacionContext] --> AuditoriaContext_to_NormalizacionContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+AuditoriaContext_to_NormalizacionContext <.. [AuditoriaContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as AuditoriaContext_to_AnonimizacionContext
+[AnonimizacionContext] --> AuditoriaContext_to_AnonimizacionContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+AuditoriaContext_to_AnonimizacionContext <.. [AuditoriaContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as AuditoriaContext_to_SistemaDePagosContext
+[SistemaDePagosContext] --> AuditoriaContext_to_SistemaDePagosContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+AuditoriaContext_to_SistemaDePagosContext <.. [AuditoriaContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as AuditoriaContext_to_ProcesamientoContext
+[ProcesamientoContext] --> AuditoriaContext_to_ProcesamientoContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+AuditoriaContext_to_ProcesamientoContext <.. [AuditoriaContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as AuditoriaContext_to_IngestionContext
+[IngestionContext] --> AuditoriaContext_to_IngestionContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+AuditoriaContext_to_IngestionContext <.. [AuditoriaContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as AuditoriaContext_to_ConsumoContext
+[ConsumoContext] --> AuditoriaContext_to_ConsumoContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+AuditoriaContext_to_ConsumoContext <.. [AuditoriaContext] : use via ANTICORRUPTION_LAYER
+
+
+
+@enduml

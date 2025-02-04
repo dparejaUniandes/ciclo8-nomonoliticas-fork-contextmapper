@@ -1,0 +1,18 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package Ambiente {
+	package "'CreacionDeAmbienteVirtual' Aggregate" <<Rectangle>> {
+		class ClientePro <<(E,DarkSeaGreen) Entity>> {
+		}
+		class AmbienteVirtualCreado <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+legend left
+  This Bounded Context 'ConsumoProContext' refines the 'ConsumoStandardContext' Bounded Context.
+end legend
+
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package Busqueda {
+	package "'BusquedaInformacionProcesada' Aggregate" <<Rectangle>> {
+		class Cliente <<(E,DarkSeaGreen) Entity>> {
+		}
+		class ArchivoDeBusqueda <<(E,DarkSeaGreen) Entity>> {
+		}
+		class DatosSeleccionados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

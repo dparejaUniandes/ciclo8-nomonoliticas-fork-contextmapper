@@ -1,0 +1,17 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package ControlDeAcceso {
+	package "'ControlarAcceso' Aggregate" <<Rectangle>> {
+		class Seguridad <<(E,DarkSeaGreen) Entity>> {
+		}
+		class Credenciales <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class AccesoValidado <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package Registro {
+	package "'RegistroUsuarios' Aggregate" <<Rectangle>> {
+		class Usuario <<(E,DarkSeaGreen) Entity>> {
+		}
+		class Nombre <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class FechaNacimiento <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class UsuarioRegistrado <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+package Carga {
+	package "'CargarArchivosDiagnostico' Aggregate" <<Rectangle>> {
+		class ArchivoCrudo <<(E,DarkSeaGreen) Entity>> {
+		}
+		class Tamanio <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class DatosCargados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+package Preparacion {
+	package "'PreparacionArchivosDiagnostico' Aggregate" <<Rectangle>> {
+		class ArchivoAnonimizado <<(E,DarkSeaGreen) Entity>> {
+		}
+		class DatosAnonimizados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+package Verificacion {
+	package "'VerificacionArchivosAnonimizados' Aggregate" <<Rectangle>> {
+		class ArchivoAnonimizadoVerificacion <<(E,DarkSeaGreen) Entity>> {
+		}
+		class DatosVerificados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+package Agrupacion {
+	package "'AgrupacionDeInformacion' Aggregate" <<Rectangle>> {
+		class ArchivoConsolidado <<(E,DarkSeaGreen) Entity>> {
+		}
+		class DatosClasificados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

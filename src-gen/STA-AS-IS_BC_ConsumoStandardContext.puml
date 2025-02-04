@@ -1,0 +1,33 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package RegistroCuenta {
+	package "'RegistroCuenta' Aggregate" <<Rectangle>> {
+		class Cuenta <<(E,DarkSeaGreen) Entity>> {
+		}
+		class CuentaRegistrada <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+package Busqueda {
+	package "'BusquedaInformacionProcesada' Aggregate" <<Rectangle>> {
+		class Cliente <<(E,DarkSeaGreen) Entity>> {
+		}
+		class ArchivoDeBusqueda <<(E,DarkSeaGreen) Entity>> {
+		}
+		class DatosSeleccionados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+package Descarga {
+	package "'DescargaDeInformacionProcesada' Aggregate" <<Rectangle>> {
+		class DetalleDescarga <<(E,DarkSeaGreen) Entity>> {
+		}
+		class DatosDescargados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

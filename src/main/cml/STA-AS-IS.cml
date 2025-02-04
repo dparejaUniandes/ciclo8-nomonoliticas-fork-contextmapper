@@ -39,7 +39,6 @@ ContextMap STAMap {
 }
 BoundedContext ProveedoresDeDatosContext {
     Module SistemaDeArchivos {
-        basePackage = se.citerus.dddsample.domain.externalmodel
         Aggregate Archivo {
             ValueObject Formato
         }
@@ -47,7 +46,7 @@ BoundedContext ProveedoresDeDatosContext {
 }
 BoundedContext IngestionContext {
     Module Registro {
-        basePackage = se.citerus.dddsample.domain.model
+        
         Aggregate RegistroUsuarios {
             Entity Usuario
             ValueObject Nombre
@@ -56,7 +55,7 @@ BoundedContext IngestionContext {
         }
     }
     Module Carga {
-        basePackage = se.citerus.dddsample.domain.model
+        
         Aggregate CargarArchivosDiagnostico {
             Entity ArchivoCrudo
             ValueObject Tamanio
@@ -64,21 +63,21 @@ BoundedContext IngestionContext {
         }
     }
     Module Preparacion {
-        basePackage = se.citerus.dddsample.domain.model
+        
         Aggregate PreparacionArchivosDiagnostico {
             Entity ArchivoAnonimizado
             DomainEvent DatosAnonimizados
         }
     }
     Module Verificacion {
-        basePackage = se.citerus.dddsample.domain.model
+        
          Aggregate VerificacionArchivosAnonimizados {
             Entity ArchivoAnonimizadoVerificacion
             DomainEvent DatosVerificados
         }
     }
     Module Agrupacion {
-        basePackage = se.citerus.dddsample.domain.model
+        
          Aggregate AgrupacionDeInformacion {
             Entity ArchivoConsolidado
             DomainEvent DatosClasificados
@@ -87,7 +86,7 @@ BoundedContext IngestionContext {
 }
 BoundedContext ProcesamientoContext {
     Module Automatizacion {
-        basePackage = se.citerus.dddsample.domain.model
+        
         Aggregate EjecucionAutomatizadaParaEntrenarModelo {
             DomainEvent ProcesamientoFinalizado
             DomainEvent DatosPersistidos
@@ -98,14 +97,14 @@ BoundedContext ProcesamientoContext {
 
 BoundedContext ConsumoStandardContext {
   Module RegistroCuenta {
-        basePackage = se.citerus.dddsample.domain.model
+        
         Aggregate RegistroCuenta {
           Entity Cuenta
             DomainEvent CuentaRegistrada
         }
   }
     Module Busqueda {
-        basePackage = se.citerus.dddsample.domain.model
+        
         Aggregate BusquedaInformacionProcesada {
             Entity Cliente
             Entity ArchivoDeBusqueda
@@ -113,7 +112,6 @@ BoundedContext ConsumoStandardContext {
         }
     }
     Module Descarga {
-        basePackage = se.citerus.dddsample.domain.model
         
         Aggregate DescargaDeInformacionProcesada {
             Entity DetalleDescarga
@@ -124,7 +122,6 @@ BoundedContext ConsumoStandardContext {
 }
 BoundedContext ConsumoProContext refines ConsumoStandardContext {
   Module Ambiente {
-        basePackage = se.citerus.dddsample.domain.model
         
         Aggregate CreacionDeAmbienteVirtual {
             Entity ClientePro

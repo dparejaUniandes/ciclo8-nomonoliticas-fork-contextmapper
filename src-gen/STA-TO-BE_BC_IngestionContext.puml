@@ -1,0 +1,71 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package Registro {
+	package "'RegistroUsuarios' Aggregate" <<Rectangle>> {
+		class Usuario <<(E,DarkSeaGreen) Entity>> {
+		}
+		class Nombre <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class FechaNacimiento <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class UsuarioRegistrado <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+package ControlDeAcceso {
+	package "'ControlarAcceso' Aggregate" <<Rectangle>> {
+		class Seguridad <<(E,DarkSeaGreen) Entity>> {
+		}
+		class Credenciales <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class AccesoValidado <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+package Carga {
+	package "'CargarArchivosDiagnostico' Aggregate" <<Rectangle>> {
+		class ArchivoCrudo <<(E,DarkSeaGreen) Entity>> {
+		}
+		class TamanioArchivo <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class DatosCargados <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+package RegulacionGubernamental {
+	package "'NormativaPais' Aggregate" <<Rectangle>> {
+		class Politica <<(E,DarkSeaGreen) Entity>> {
+		}
+		class Locacion <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class Pais <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class PoliticasLegalesVerificadas <<(E,#ff9f4b) Domain Event>> {
+		}
+		class InformacionAuditada <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+package Almacenamiento {
+	package "'AlmacenamientoDeInformacionMasiva' Aggregate" <<Rectangle>> {
+		class Almacenamiento <<(E,DarkSeaGreen) Entity>> {
+		}
+		class TipoAlmacenamiento <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class Ubicacion <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class TamanoMaximo <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class DatosAlmacenados <<(E,#ff9f4b) Domain Event>> {
+		}
+		class DatosEliminados <<(E,#ff9f4b) Domain Event>> {
+		}
+		class AlmacenamientoRedimensionado <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml
