@@ -4,6 +4,10 @@
 
 En la entrega de la semana 2 se ha realizado del dominio y subdominios tanto para AS-IS como para TO-BE con ContextMapper, para estos también se identifican los vision statement con el DSL.
 
+## Convenciones y definiciones
+<img width="1553" alt="image" src="https://github.com/user-attachments/assets/cc62b500-87e4-41f8-8dd2-2200914b7dd6" />
+
+
 ## Event Storming AS-IS
 <img width="1532" alt="image" src="https://github.com/user-attachments/assets/66d831b0-506c-4be6-9357-20207fddf78f" />
 
@@ -32,3 +36,10 @@ Nos hemos basado en el workspace Demo que suministra ContextMapper, por este mot
 ![image](https://github.com/user-attachments/assets/108ce70e-7c15-437a-9a54-2fa3e3c2b510)
 
 Para acceder a las imágenes y PlantUML, se debe tener en cuenta la carpeta `src-gen` ubicada en la raíz del proyecto.
+
+Los diagramas de PlantUML se pueden identificar por los archivos que terminan en puml, estos archivos contienen el código en PlantUML el cual puede ser copiado y pegado en [editor PlantUML](https://www.planttext.com/), como se muestra a continuación
+
+<img width="1663" alt="image" src="https://github.com/user-attachments/assets/e99be92d-d36c-4cac-803c-b793a78e0996" />
+
+En el ejemplo se ha tomado el código del archivo `src-gen/STA-AS-IS_BC_IngestionContext.puml`, se ha pegado en el editor ubicado en la parte izquierda y luego se ha oprimido **Refresh** para ver el diagrama
+
