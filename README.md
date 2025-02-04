@@ -29,10 +29,10 @@ Nos hemos basado en el workspace Demo que suministra ContextMapper, por este mot
 
 ### Diagramas
 
-**AS-IS ContextMapper Imagen**
+**AS-IS ContextMapper Imagen -> archivo STA-AS-IS_ContextMap.png**
 ![image](https://github.com/user-attachments/assets/bf711fbe-95b2-457a-89f1-a52ae90a5cb8)
 
-**TO-BE ContextMapper Imagen**
+**TO-BE ContextMapper Imagen -> archivo STA-TO-BE_ContextMap.png**
 ![image](https://github.com/user-attachments/assets/108ce70e-7c15-437a-9a54-2fa3e3c2b510)
 
 Para acceder a las imágenes y PlantUML, se debe tener en cuenta la carpeta `src-gen` ubicada en la raíz del proyecto.
@@ -43,3 +43,6 @@ Los diagramas de PlantUML se pueden identificar por los archivos que terminan en
 
 En el ejemplo se ha tomado el código del archivo `src-gen/STA-AS-IS_BC_IngestionContext.puml`, se ha pegado en el editor ubicado en la parte izquierda y luego se ha oprimido **Refresh** para ver el diagrama
 
+## Bono
+En la ruta `src/main/cml` se encuentra el archivo **bono.cml** en donde se identifican 4 historias de usuario como se puede ver a continuación, también se han identificado las entidades, pero estas se encuentra en los archivo **STA-AS-IS.cml** y **STA-TO-BE.cml** en donde se han generado los contextos, dominios y subdominios del AS-IS y el TO-BE.
+<img width="799" alt="image" src="https://github.com/user-attachments/assets/5f2ef9cb-85e6-4aaa-a377-af2f28d0d853" />
