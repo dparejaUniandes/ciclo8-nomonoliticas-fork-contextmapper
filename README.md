@@ -6,7 +6,7 @@ En la entrega de la semana 2 se ha realizado del dominio y subdominios tanto par
 <img width="1532" alt="image" src="https://github.com/user-attachments/assets/66d831b0-506c-4be6-9357-20207fddf78f" />
 
 ## Event Storming TO-BE
-
+<img width="1649" alt="image" src="https://github.com/user-attachments/assets/2d4ac83d-f041-4220-818e-7374750faebd" />
 
 Para la consulta de los event storming, se puede ingresar desde miro:
 * [Enlace Miro con Events Storming](https://miro.com/app/board/uXjVLnwfFlU=/?share_link_id=150905541425)
