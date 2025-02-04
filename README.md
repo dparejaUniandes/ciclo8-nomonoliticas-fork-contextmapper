@@ -15,7 +15,7 @@ Para la consulta de los event storming, se puede ingresar desde miro:
 
 ## Ejecución del workspace con GitPod
 Se ha utilizado el DSL ContextMapper, en donde se debe ingresar al presente repositorio y en la url anteponer `gitpod.io/#`, quedando de esta manera `gitpod.io/#/https://github.com/dparejaUniandes/ciclo8-nomonoliticas-fork-contextmapper`, para mayor facilidad, se pueda dar clic sobre el siguiente enlace:
-> [Crear ambiente para ejecición del ContextMapper](gitpod.io/#/https://github.com/dparejaUniandes/ciclo8-nomonoliticas-fork-contextmapper)
+> [Crear ambiente para ejecición del ContextMapper](https://gitpod.io/new/#/https:/github.com/dparejaUniandes/ciclo8-nomonoliticas-fork-contextmapper)
 
 ## Archivos
 ### Código
