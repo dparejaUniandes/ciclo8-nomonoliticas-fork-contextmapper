@@ -9,7 +9,7 @@ Domain GestionDeDatosMedicosParaModelosIA {
     type = CORE_DOMAIN
     domainVisionStatement = "Recaudar imágenes médicas y diagnóstico"
   }
-  Subdomain LimpiezaYAnonimizacion {
+  Subdomain LimpiezaYAnonimizacionContext {
     type = CORE_DOMAIN
     domainVisionStatement = "Limpieza y anonimización de información en crudo y sensible"
   }
@@ -40,10 +40,12 @@ Domain GestionDeDatosMedicosParaModelosIA {
 }
 
 ContextMap STAMap {
-    type = SYSTEM_LANDSCAPE
-    state = AS_IS
-    contains ProveedoresDeDatosContext
+  type = SYSTEM_LANDSCAPE
+  state = AS_IS
+  contains ProveedoresDeDatosContext
   contains IngestionContext
+  contains NormalizacionContext
+  contains AnonimizacionContext
   contains ProcesamientoContext
   contains ConsumoStandardContext
   contains ConsumoProContext
@@ -57,19 +59,25 @@ ContextMap STAMap {
   RegionContext [D, ACL]<-[U,OHS,PL] ProveedoresDeDatosContext
   IngestionContext [D, ACL]<-[U,OHS,PL] RegionContext
   SistemaDePagosContext [D, ACL]<-[U,OHS,PL] RegionContext
-  ProcesamientoContext [D, ACL]<-[U,OHS,PL] IngestionContext
+  NormalizacionContext [D, ACL]<-[U,OHS,PL] IngestionContext
+
+  AnonimizacionContext [D, ACL]<-[U,OHS,PL] NormalizacionContext
+
+  ProcesamientoContext [D, ACL]<-[U,OHS,PL] AnonimizacionContext
 
   ConsumoContext [D, ACL]<-[U,OHS,PL] SistemaDePagosContext
   ConsumoContext [D, ACL]<-[U,OHS,PL] ProcesamientoContext
 
-    ConsumoStandardContext [SK]<->[SK] ConsumoContext
-    ConsumoProContext [SK]<->[SK] ConsumoContext
-    ConsumoEnterpriseContext [SK]<->[SK] ConsumoContext
+  ConsumoStandardContext [SK]<->[SK] ConsumoContext
+  ConsumoProContext [SK]<->[SK] ConsumoContext
+  ConsumoEnterpriseContext [SK]<->[SK] ConsumoContext
 
-    AuditoriaContext [D, ACL]<-[U,OHS,PL] SistemaDePagosContext
-    AuditoriaContext [D, ACL]<-[U,OHS,PL] ProcesamientoContext
-    AuditoriaContext [D, ACL]<-[U,OHS,PL] IngestionContext
-    AuditoriaContext [D, ACL]<-[U,OHS,PL] ConsumoContext
+  AuditoriaContext [D, ACL]<-[U,OHS,PL] NormalizacionContext
+  AuditoriaContext [D, ACL]<-[U,OHS,PL] AnonimizacionContext
+  AuditoriaContext [D, ACL]<-[U,OHS,PL] SistemaDePagosContext
+  AuditoriaContext [D, ACL]<-[U,OHS,PL] ProcesamientoContext
+  AuditoriaContext [D, ACL]<-[U,OHS,PL] IngestionContext
+  AuditoriaContext [D, ACL]<-[U,OHS,PL] ConsumoContext
 
 }
 BoundedContext ProveedoresDeDatosContext {
@@ -82,7 +90,7 @@ BoundedContext ProveedoresDeDatosContext {
 }
 BoundedContext IngestionContext {
     Module Registro {
-        basePackage = se.citerus.dddsample.domain.model
+        
         Aggregate RegistroUsuarios {
             Entity Usuario
             ValueObject Nombre
@@ -91,7 +99,7 @@ BoundedContext IngestionContext {
         }
     }
   Module ControlDeAcceso {
-        basePackage = se.citerus.dddsample.domain.model
+        
         Aggregate ControlarAcceso {
             Entity Seguridad
             ValueObject Credenciales
@@ -99,7 +107,7 @@ BoundedContext IngestionContext {
         }
     }
     Module Carga {
-        basePackage = se.citerus.dddsample.domain.model
+        
         Aggregate CargarArchivosDiagnostico {
             Entity ArchivoCrudo
             ValueObject TamanioArchivo
@@ -107,7 +115,7 @@ BoundedContext IngestionContext {
         }
     }
   Module RegulacionGubernamental {
-        basePackage = se.citerus.dddsample.domain.model
+        
       Aggregate NormativaPais {
         Entity Politica 
               ValueObject Locacion
@@ -117,7 +125,7 @@ BoundedContext IngestionContext {
       }
     }
 Module Almacenamiento {
-    basePackage = se.citerus.dddsample.domain.model
+    
     Aggregate AlmacenamientoDeInformacionMasiva {
         Entity Almacenamiento 
             ValueObject TipoAlmacenamiento
@@ -129,18 +137,37 @@ Module Almacenamiento {
         
     }
 }
-Module Anonimizacion {
-    basePackage = se.citerus.dddsample.domain.model
-    Aggregate ProcesoDeAnonimizacion {
-        Entity ArchivoAnonimizado 
+}
+
+BoundedContext NormalizacionContext {
+    Module NormalizacionContextProceso {
+      
+      Aggregate ProcesoDeLimpieza {
+        Entity PipelineLimpieza 
+            ValueObject TecnicaLimpieza
+            DomainEvent InformacionTransformada
+      }
+
+      Aggregate ProcesoDeCanonizacion {
+        Entity PipelineCanonizacion 
+            ValueObject TecnicaCanonizacion
+            DomainEvent InformacionCanonizada
+      }
+  }
+}
+
+BoundedContext AnonimizacionContext {
+  Module AnonimizacionContextProceso {
+    Aggregate ProcesoDeAnonimizacionContext {
+        Entity PipelineAnonimizacionContext 
             ValueObject Identificador
             ValueObject EstadoAnonimizado
-            ValueObject TecnicaAnonimizacion
+            ValueObject TecnicaAnonimizacionContext
             DomainEvent InformacionPreparada
             DomainEvent DatosAnonimizados 
     }
     Aggregate ProcesoDeVerificacion {
-            Entity Pipeline
+            Entity PipelineVerificacion
             DomainEvent DatosVerificados
             DomainEvent DatosClasificados
             DomainEvent VerificacionFallida
@@ -150,7 +177,7 @@ Module Anonimizacion {
  
  BoundedContext ProcesamientoContext {
     Module Procesamiento {
-    basePackage = se.citerus.dddsample.domain.model
+    
     Aggregate Etiqueta {
             Entity Pipeline2
             DomainEvent DatosEstructurados
@@ -161,14 +188,14 @@ Module Anonimizacion {
 
 BoundedContext ConsumoContext {
   Module RegistroCuenta {
-        basePackage = se.citerus.dddsample.domain.model
+        
         Aggregate RegistroCuenta {
           Entity Cuenta
             DomainEvent CuentaRegistrada
         }
   }
     Module Busqueda {
-        basePackage = se.citerus.dddsample.domain.model
+        
         Aggregate BusquedaInformacionProcesada {
             Entity Cliente
             Entity ArchivoDeBusqueda
@@ -176,7 +203,7 @@ BoundedContext ConsumoContext {
         }
     }
     Module Descarga {
-        basePackage = se.citerus.dddsample.domain.model
+        
         
         Aggregate DescargaDeInformacionProcesada {
             Entity DetalleDescarga
@@ -190,7 +217,7 @@ BoundedContext ConsumoStandardContext {
 }
 BoundedContext ConsumoProContext refines ConsumoStandardContext {
   Module Ambiente {
-        basePackage = se.citerus.dddsample.domain.model
+        
         
         Aggregate CreacionDeAmbienteVirtual {
             Entity ClientePro
