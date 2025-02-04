@@ -25,14 +25,19 @@ ContextMap STAMap {
     type = SYSTEM_LANDSCAPE
     state = AS_IS
     contains ProcesamientoContext
-    contains ConsumoContext
     contains IngestionContext
-    contains SistemaExternoDeProveedores
-    IngestionContext [D, ACL]<-[U,OHS,PL] SistemaExternoDeProveedores : ExtraerDatosOnPremise
+    contains ProveedoresDeDatosContext
+    contains ConsumoStandardContext
+    contains ConsumoProContext
+    contains ConsumoEnterpriseContext
+    IngestionContext [D, ACL]<-[U,OHS,PL] ProveedoresDeDatosContext : ExtraerDatosOnPremise
     ProcesamientoContext [D, ACL]<-[U,OHS,PL] IngestionContext
-    ConsumoContext [D]<-[U,OHS,PL] ProcesamientoContext
+
+    ConsumoStandardContext [D]<-[U,OHS,PL] ProcesamientoContext
+    ConsumoProContext [D]<-[U,OHS,PL] ProcesamientoContext
+    ConsumoEnterpriseContext [D]<-[U,OHS,PL] ProcesamientoContext
 }
-BoundedContext SistemaExternoDeProveedores {
+BoundedContext ProveedoresDeDatosContext {
     Module SistemaDeArchivos {
         basePackage = se.citerus.dddsample.domain.externalmodel
         Aggregate Archivo {
@@ -90,7 +95,15 @@ BoundedContext ProcesamientoContext {
     }
     
 }
-BoundedContext ConsumoContext {
+
+BoundedContext ConsumoStandardContext {
+  Module RegistroCuenta {
+        basePackage = se.citerus.dddsample.domain.model
+        Aggregate RegistroCuenta {
+          Entity Cuenta
+            DomainEvent CuentaRegistrada
+        }
+  }
     Module Busqueda {
         basePackage = se.citerus.dddsample.domain.model
         Aggregate BusquedaInformacionProcesada {
@@ -106,5 +119,19 @@ BoundedContext ConsumoContext {
             Entity DetalleDescarga
             DomainEvent DatosDescargados
         }
+  }
+  
+}
+BoundedContext ConsumoProContext refines ConsumoStandardContext {
+  Module Ambiente {
+        basePackage = se.citerus.dddsample.domain.model
+        
+        Aggregate CreacionDeAmbienteVirtual {
+            Entity ClientePro
+            DomainEvent AmbienteVirtualCreado
+        }
     }
+}
+BoundedContext ConsumoEnterpriseContext refines ConsumoProContext {
+  
 }

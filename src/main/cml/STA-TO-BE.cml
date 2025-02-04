@@ -29,25 +29,50 @@ Domain GestionDeDatosMedicosParaModelosIA {
     type = GENERIC_SUBDOMAIN
     domainVisionStatement = "Gestion de la normativa y regulaciones de los paises"
   }
+  Subdomain Auditoria {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Administración de la auditoría en el sistema global de STA"
+  }
+  Subdomain SistemaDePagosTercerizado {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Gestionar pagos realizados por cliente y generación de pagos a proveedores"
+  }
 }
+
 ContextMap STAMap {
     type = SYSTEM_LANDSCAPE
     state = AS_IS
-    contains SistemaExternoDeProveedores
+    contains ProveedoresDeDatosContext
   contains IngestionContext
   contains ProcesamientoContext
-    contains ConsumoStandardContext
-    contains ConsumoProContext
-    contains ConsumoEnterpriseContext
+  contains ConsumoStandardContext
+  contains ConsumoProContext
+  contains ConsumoEnterpriseContext
+  contains SistemaDePagosContext
+  contains RegionContext
+  contains ConsumoContext
+  contains AuditoriaContext
     
     
-  IngestionContext [D, ACL]<-[U,OHS,PL] SistemaExternoDeProveedores : ExtraerDatosOnPremise
-    ProcesamientoContext [D, ACL]<-[U,OHS,PL] IngestionContext
-    ConsumoStandardContext [D]<-[U,OHS,PL] ProcesamientoContext
-    ConsumoProContext [D]<-[U,OHS,PL] ProcesamientoContext
-    ConsumoEnterpriseContext [D]<-[U,OHS,PL] ProcesamientoContext
+  RegionContext [D, ACL]<-[U,OHS,PL] ProveedoresDeDatosContext
+  IngestionContext [D, ACL]<-[U,OHS,PL] RegionContext
+  SistemaDePagosContext [D, ACL]<-[U,OHS,PL] RegionContext
+  ProcesamientoContext [D, ACL]<-[U,OHS,PL] IngestionContext
+
+  ConsumoContext [D, ACL]<-[U,OHS,PL] SistemaDePagosContext
+  ConsumoContext [D, ACL]<-[U,OHS,PL] ProcesamientoContext
+
+    ConsumoStandardContext [SK]<->[SK] ConsumoContext
+    ConsumoProContext [SK]<->[SK] ConsumoContext
+    ConsumoEnterpriseContext [SK]<->[SK] ConsumoContext
+
+    AuditoriaContext [D, ACL]<-[U,OHS,PL] SistemaDePagosContext
+    AuditoriaContext [D, ACL]<-[U,OHS,PL] ProcesamientoContext
+    AuditoriaContext [D, ACL]<-[U,OHS,PL] IngestionContext
+    AuditoriaContext [D, ACL]<-[U,OHS,PL] ConsumoContext
+
 }
-BoundedContext SistemaExternoDeProveedores {
+BoundedContext ProveedoresDeDatosContext {
     Module SistemaDeArchivos {
         basePackage = se.citerus.dddsample.domain.externalmodel
         Aggregate Archivo {
@@ -133,7 +158,8 @@ Module Anonimizacion {
     }
   }
 }
-BoundedContext ConsumoStandardContext {
+
+BoundedContext ConsumoContext {
   Module RegistroCuenta {
         basePackage = se.citerus.dddsample.domain.model
         Aggregate RegistroCuenta {
@@ -157,6 +183,9 @@ BoundedContext ConsumoStandardContext {
             DomainEvent DatosDescargados
         }
   }
+}
+
+BoundedContext ConsumoStandardContext {
   
 }
 BoundedContext ConsumoProContext refines ConsumoStandardContext {
@@ -170,5 +199,17 @@ BoundedContext ConsumoProContext refines ConsumoStandardContext {
     }
 }
 BoundedContext ConsumoEnterpriseContext refines ConsumoProContext {
+  
+}
+
+BoundedContext SistemaDePagosContext {
+  
+}
+
+BoundedContext RegionContext {
+  
+}
+
+BoundedContext AuditoriaContext {
   
 }
