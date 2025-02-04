@@ -1,5 +1,7 @@
 # Entrega semana 2
 
+**Nota** La entrega se realiza sobre el repositorio `https://github.com/dparejaUniandes/ciclo8-nomonoliticas-fork-contextmapper`, por favor, tener en cuenta las instrucciones que se muestran a continuación.
+
 En la entrega de la semana 2 se ha realizado del dominio y subdominios tanto para AS-IS como para TO-BE con ContextMapper, para estos también se identifican los vision statement con el DSL.
 
 ## Event Storming AS-IS
